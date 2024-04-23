@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class UserFileLocalDataSource {
+public class UserFileLocalDataSource implements UserLocalDataSource{
 
     private String nameFile = "user.txt";
 
@@ -82,7 +82,7 @@ public class UserFileLocalDataSource {
         List<User> newList = new ArrayList<>();
         List<User> models = findAll();
         for (User model : models) {
-            if (model.userCode != modelId) {
+            if (!model.userCode.equals(modelId)) {
                 newList.add(model);
             }
         }

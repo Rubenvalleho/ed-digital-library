@@ -1,18 +1,19 @@
 package com.iesam.digitallibrary.feature.user.data;
 
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.feature.user.data.local.UserLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.User;
 import com.iesam.digitallibrary.feature.user.domain.UserRepository;
 
 public class UserDataRepository implements UserRepository {
-    UserFileLocalDataSource userFileLocalDataSource;
+    UserLocalDataSource userLocalDataSource;
 
-    public UserDataRepository (UserFileLocalDataSource userFileLocalDataSource) {
-        this.userFileLocalDataSource = userFileLocalDataSource;
+    public UserDataRepository (UserLocalDataSource userLocalDataSource) {
+        this.userLocalDataSource = userLocalDataSource;
     }
 
     @Override
     public void saveUser(User user) {
-        userFileLocalDataSource.save(user);
+        userLocalDataSource.save(user);
     }
 }
