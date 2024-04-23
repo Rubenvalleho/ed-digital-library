@@ -16,4 +16,15 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "User {" +
+                "Codigo de usuario: " + userCode +
+                "\nDni: " + dni +
+                "\nNombre: " + name +
+                "\nApellidos: " + lastName +
+                "\nNumero de telefono: " + phoneNumber +
+                "\nDirección: " + address + " }";
+    }
 }
