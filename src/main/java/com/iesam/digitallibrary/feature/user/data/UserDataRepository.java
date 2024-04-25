@@ -16,6 +16,7 @@ public class UserDataRepository implements UserRepository {
     public void saveUser(User user) {
         userLocalDataSource.save(user);
     }
+
     public User getUser (String userCode) {
         return userLocalDataSource.findById(userCode);
     }
