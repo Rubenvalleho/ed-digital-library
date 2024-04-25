@@ -1,15 +1,25 @@
-## Description de la tarea
+## 📝 Breve descripción del ticket asociado a esta PR
 
-<!-- Descripción sobre lo que se pide en la tarea -->
 
-## ¿Cómo se ha implementado?
+## 👩‍💻 Resumen de los cambios introducidos
 
-<!-- Estructura de clases, patrones: MVVM, etc.  -->
 
-## Keywords
+## 👁️ Partes del código debe ser revisado con más atención
 
-<!-- Palabras relacionadas con los conceptos vistos -->
 
-## Screenshots or Video
+## 📸 Screenshot o Video
 
-<!-- Captura de pantalla de la consola -->
+
+## ✅ Checklist
+- [ ] He añadido un título a la PR descriptivo.
+- [ ] Me he asignado como autor.
+- [ ] He asignado a un revisor.
+- [ ] El proyecto compila y se ejecuta correctamente.
+- [ ] El código se ha probado con todas las opciones posibles.
+- [ ] El código ha sido formateado.
+- [ ] He eliminado código de prueba.
+- [ ] Se han añadido test unitarios.
+
+## ✋ Notas adicionales (Disclaimer)
+
+## 🌈 Añade un Gif que represente a esta PR
