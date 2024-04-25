@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class UserPresentation {
     public static void addUser() {
-        Scanner scanner = new Scanner (System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("\nVamos a crear un usuario nuevo.");
         System.out.println("Introduce el codigo de usuario: ");
