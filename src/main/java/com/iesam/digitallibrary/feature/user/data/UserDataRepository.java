@@ -21,6 +21,9 @@ public class UserDataRepository implements UserRepository {
     public User getUser (String userCode) {
         return userLocalDataSource.findById(userCode);
     }
+    public void modifyUser(User user) {
+        userLocalDataSource.modify(user);
+    }
     public ArrayList<User> getUsers (){
         return (ArrayList<User>) userLocalDataSource.findAll();
     }

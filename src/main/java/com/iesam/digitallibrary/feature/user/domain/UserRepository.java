@@ -6,4 +6,5 @@ public interface UserRepository {
     public void saveUser(User user);
     public User getUser (String userCode);
     public ArrayList<User> getUsers();
+    public void modifyUser (User user);
 }

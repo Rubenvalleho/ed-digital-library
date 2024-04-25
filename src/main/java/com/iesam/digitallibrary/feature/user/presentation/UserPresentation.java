@@ -4,6 +4,9 @@ import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.CreateUserUseCase;
 import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
+import com.iesam.digitallibrary.feature.user.domain.ModifyUserUseCase;
+import com.iesam.digitallibrary.feature.user.domain.User;
+
 import com.iesam.digitallibrary.feature.user.domain.GetUsersListUseCase;
 import com.iesam.digitallibrary.feature.user.domain.User;
 
@@ -58,5 +61,28 @@ public class UserPresentation {
         for (User user : users) {
             System.out.println(user);
         }
+    }
+    public static void modifyUser() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Vamos a modificar un usuario.");
+        System.out.println("Dime el codigo del usuario a modificar.");
+        String userCode = scanner.next();
+        System.out.println("Introduce el dni: ");
+        String dni = scanner.next();
+        System.out.println("Introduce el nombre: ");
+        String name = scanner.next();
+        System.out.println("Introduce los apellidos: ");
+        String lastName = scanner.next();
+        System.out.println("Introduce el numero de telefono: ");
+        String phoneNumber = scanner.next();
+        System.out.println("Introduce su dirección: ");
+        String address = scanner.next();
+
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        ModifyUserUseCase modifyUserUseCase = new ModifyUserUseCase(userDataRepository);
+
+        User user = new User(userCode,dni,name,lastName,phoneNumber,address);
+        modifyUserUseCase.execute(user);
     }
 }
