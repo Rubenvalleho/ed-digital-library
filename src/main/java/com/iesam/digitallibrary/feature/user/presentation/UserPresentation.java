@@ -7,6 +7,10 @@ import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
 import com.iesam.digitallibrary.feature.user.domain.ModifyUserUseCase;
 import com.iesam.digitallibrary.feature.user.domain.User;
 
+import com.iesam.digitallibrary.feature.user.domain.GetUsersListUseCase;
+import com.iesam.digitallibrary.feature.user.domain.User;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserPresentation {
@@ -48,6 +52,16 @@ public class UserPresentation {
         System.out.println(user);
     }
 
+    public static void getUsersList() {
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        GetUsersListUseCase getUsersListUseCase = new GetUsersListUseCase(userDataRepository);
+
+        ArrayList<User> users = getUsersListUseCase.execute();
+
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
     public static void modifyUser() {
         Scanner scanner = new Scanner(System.in);
 
