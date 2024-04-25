@@ -5,6 +5,8 @@ import com.iesam.digitallibrary.feature.user.data.local.UserLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.User;
 import com.iesam.digitallibrary.feature.user.domain.UserRepository;
 
+import java.util.ArrayList;
+
 public class UserDataRepository implements UserRepository {
     UserLocalDataSource userLocalDataSource;
 
@@ -18,5 +20,8 @@ public class UserDataRepository implements UserRepository {
     }
     public User getUser (String userCode) {
         return userLocalDataSource.findById(userCode);
+    }
+    public ArrayList<User> getUsers (){
+        return (ArrayList<User>) userLocalDataSource.findAll();
     }
 }

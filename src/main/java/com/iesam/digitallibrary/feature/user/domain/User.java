@@ -20,11 +20,11 @@ public class User {
     @Override
     public String toString() {
         return "User {" +
-                "Codigo de usuario: " + userCode +
+                "\nCodigo de usuario: " + userCode +
                 "\nDni: " + dni +
                 "\nNombre: " + name +
                 "\nApellidos: " + lastName +
                 "\nNumero de telefono: " + phoneNumber +
-                "\nDirección: " + address + " }";
+                "\nDirección: " + address + "\n}\n";
     }
 }
