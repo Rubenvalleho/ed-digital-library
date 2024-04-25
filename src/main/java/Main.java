@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-
+        verMenu();
     }
 
     public static void verMenu() {
@@ -16,6 +15,7 @@ public class Main {
             System.out.println("\n| Biblioteca digital |");
             System.out.println("----------------------");
             System.out.println("1. Añadir usuario.");
+            System.out.println("2. Visualizar usuario.");
             System.out.println("10. Salir.");
             System.out.println("Elige una opción: ");
 
@@ -26,6 +26,8 @@ public class Main {
                     UserPresentation.addUser();
                     System.out.println("Usuario creado.");
                     break;
+                case 2:
+                    UserPresentation.viewUser();
             }
         }
         while (choice != 10);

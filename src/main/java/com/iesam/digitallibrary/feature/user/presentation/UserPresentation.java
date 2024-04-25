@@ -3,6 +3,7 @@ package com.iesam.digitallibrary.feature.user.presentation;
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.CreateUserUseCase;
+import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
 import com.iesam.digitallibrary.feature.user.domain.User;
 
 import java.util.Scanner;
@@ -31,5 +32,18 @@ public class UserPresentation {
         User user = new User(userCode, dni, name, lastName, phoneNumber, address);
 
         createUserUseCase.execute(user);
+    }
+
+    public static void viewUser() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Inserta el codigo del usuario a visualizar.");
+        String userCode = scanner.nextLine();
+
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        GetUserUseCase getUserUseCase = new GetUserUseCase(userDataRepository);
+
+        User user = getUserUseCase.execute(userCode);
+
+        System.out.println(user);
     }
 }
