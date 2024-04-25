@@ -88,4 +88,9 @@ public class UserFileLocalDataSource implements UserLocalDataSource{
         }
         saveList(newList);
     }
+
+    public void modify(User user) {
+        delete(user.userCode);
+        save(user);
+    }
 }

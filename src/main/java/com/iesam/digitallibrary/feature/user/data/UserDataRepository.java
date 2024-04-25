@@ -19,4 +19,7 @@ public class UserDataRepository implements UserRepository {
     public User getUser (String userCode) {
         return userLocalDataSource.findById(userCode);
     }
+    public void modifyUser(User user) {
+        userLocalDataSource.modify(user);
+    }
 }

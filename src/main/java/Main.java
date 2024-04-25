@@ -16,6 +16,7 @@ public class Main {
             System.out.println("----------------------");
             System.out.println("1. Añadir usuario.");
             System.out.println("2. Visualizar usuario.");
+            System.out.println("4. Modificar usuario.");
             System.out.println("10. Salir.");
             System.out.println("Elige una opción: ");
 
@@ -28,6 +29,9 @@ public class Main {
                     break;
                 case 2:
                     UserPresentation.viewUser();
+                    break;
+                case 4:
+                    UserPresentation.modifyUser();
             }
         }
         while (choice != 10);

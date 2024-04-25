@@ -10,4 +10,5 @@ public interface UserLocalDataSource {
     public User findById(String id);
     public List<User> findAll();
     public void delete(String modelId);
+    public void modify(User user);
 }
