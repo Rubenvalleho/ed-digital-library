@@ -2,12 +2,8 @@ package com.iesam.digitallibrary.feature.user.presentation;
 
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
-import com.iesam.digitallibrary.feature.user.domain.CreateUserUseCase;
-import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
-import com.iesam.digitallibrary.feature.user.domain.ModifyUserUseCase;
-import com.iesam.digitallibrary.feature.user.domain.User;
+import com.iesam.digitallibrary.feature.user.domain.*;
 
-import com.iesam.digitallibrary.feature.user.domain.GetUsersListUseCase;
 import com.iesam.digitallibrary.feature.user.domain.User;
 
 import java.util.ArrayList;
@@ -62,6 +58,7 @@ public class UserPresentation {
             System.out.println(user);
         }
     }
+
     public static void modifyUser() {
         Scanner scanner = new Scanner(System.in);
 
@@ -82,7 +79,17 @@ public class UserPresentation {
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
         ModifyUserUseCase modifyUserUseCase = new ModifyUserUseCase(userDataRepository);
 
-        User user = new User(userCode,dni,name,lastName,phoneNumber,address);
+        User user = new User(userCode, dni, name, lastName, phoneNumber, address);
         modifyUserUseCase.execute(user);
+    }
+
+    public static void deleteUser() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escribe el codigo de usuario del usuario que quieras eliminar. ");
+        String userCode = scanner.next();
+
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(userDataRepository);
+        deleteUserUseCase.execute(userCode);
     }
 }

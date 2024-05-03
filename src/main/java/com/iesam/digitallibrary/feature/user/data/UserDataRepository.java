@@ -27,4 +27,7 @@ public class UserDataRepository implements UserRepository {
     public ArrayList<User> getUsers (){
         return (ArrayList<User>) userLocalDataSource.findAll();
     }
+    public void deleteUser (String userCode) {
+        userLocalDataSource.delete(userCode);
+    }
 }
