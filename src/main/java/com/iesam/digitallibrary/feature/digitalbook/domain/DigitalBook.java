@@ -14,4 +14,15 @@ public class DigitalBook {
         this.editorial = editorial;
         this.releaseDate = releaseDate;
     }
+
+    @Override
+    public String toString() {
+        return "DigitalBook{" +
+                "ID='" + id + '\'' +
+                ", titulo='" + title + '\'' +
+                ", autor='" + author + '\'' +
+                ", editorial='" + editorial + '\'' +
+                ", fecha de salida='" + releaseDate + '\'' +
+                '}';
+    }
 }
