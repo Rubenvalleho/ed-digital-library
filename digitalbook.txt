@@ -1,0 +1,1 @@
+[{"id":"1","title":"Amanecer_rojo","author":"Pierce_brown","editorial":"RBA","releaseDate":"01/01/2013"}]

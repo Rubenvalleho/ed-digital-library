@@ -4,6 +4,7 @@ import com.iesam.digitallibrary.feature.digitalbook.data.DigitalBookDataReposito
 import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookFileLocalDataSource;
 import com.iesam.digitallibrary.feature.digitalbook.domain.CreateDigitalBookUseCase;
 import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
+import com.iesam.digitallibrary.feature.digitalbook.domain.GetDigitalBookUseCase;
 
 import java.util.Scanner;
 
@@ -17,12 +18,16 @@ public class DigitalBookPresentation {
             System.out.println("Menú de libros digitales.");
             System.out.println("-------------------------");
             System.out.println("1. Guardar libro digital.");
+            System.out.println("2. Obtener libro digital.");
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                  saveDigitalBook();
-                  break;
+                    saveDigitalBook();
+                    break;
+                case 2:
+                    getDigitalBook();
+                    break;
             }
         } while (choice != 10);
     }
@@ -43,7 +48,19 @@ public class DigitalBookPresentation {
         System.out.println("Introduce la fecha de salida del libro: ");
         String releaseDate = scanner.next();
 
-        DigitalBook digitalBook = new DigitalBook(id,title,author,editorial,releaseDate);
+        DigitalBook digitalBook = new DigitalBook(id, title, author, editorial, releaseDate);
         createDigitalBookUseCase.execute(digitalBook);
+    }
+
+    public static void getDigitalBook() {
+        Scanner scanner = new Scanner(System.in);
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
+        GetDigitalBookUseCase getDigitalBookUseCase = new GetDigitalBookUseCase(digitalBookDataRepository);
+
+        System.out.println("Introduce el id del libro a obtener: ");
+        String id = scanner.next();
+
+        DigitalBook digitalBook = getDigitalBookUseCase.execute(id);
+        System.out.println(digitalBook);
     }
 }
