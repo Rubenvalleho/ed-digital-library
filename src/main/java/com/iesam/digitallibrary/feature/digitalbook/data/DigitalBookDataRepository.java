@@ -1,4 +1,17 @@
 package com.iesam.digitallibrary.feature.digitalbook.data;
 
-public class DigitalBookDataRepository {
+import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookLocalDataSource;
+import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
+import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBookRepository;
+
+public class DigitalBookDataRepository implements DigitalBookRepository {
+    private DigitalBookLocalDataSource digitalBookLocalDataSource;
+    public DigitalBookDataRepository(DigitalBookLocalDataSource digitalBookLocalDataSource) {
+        this.digitalBookLocalDataSource = digitalBookLocalDataSource;
+    }
+
+    @Override
+    public void saveDigitalBook(DigitalBook digitalBook) {
+        digitalBookLocalDataSource.save(digitalBook);
+    }
 }
