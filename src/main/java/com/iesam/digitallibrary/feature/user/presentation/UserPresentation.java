@@ -21,6 +21,7 @@ public class UserPresentation {
             System.out.println("2. Visualizar usuario.");
             System.out.println("3. Visualizar la lista completa de usuarios registrados.");
             System.out.println("4. Modificar usuario.");
+            System.out.println("5. Eliminar usuario.");
             System.out.println("10. Salir.");
             System.out.println("Elige una opción: ");
 
@@ -28,17 +29,20 @@ public class UserPresentation {
 
             switch (choice) {
                 case 1:
-                    UserPresentation.addUser();
+                    addUser();
                     System.out.println("Usuario creado.");
                     break;
                 case 2:
-                    UserPresentation.viewUser();
+                    viewUser();
                     break;
                 case 3:
-                    UserPresentation.getUsersList();
+                    getUsersList();
                     break;
                 case 4:
-                    UserPresentation.modifyUser();
+                    modifyUser();
+                    break;
+                case 5:
+                    deleteUser();
                     break;
             }
         }
