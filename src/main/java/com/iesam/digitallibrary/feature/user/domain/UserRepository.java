@@ -7,4 +7,5 @@ public interface UserRepository {
     public User getUser (String userCode);
     public ArrayList<User> getUsers();
     public void modifyUser (User user);
+    public void deleteUser (String userCode);
 }

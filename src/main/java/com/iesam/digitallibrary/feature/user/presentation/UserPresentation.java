@@ -2,12 +2,8 @@ package com.iesam.digitallibrary.feature.user.presentation;
 
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
-import com.iesam.digitallibrary.feature.user.domain.CreateUserUseCase;
-import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
-import com.iesam.digitallibrary.feature.user.domain.ModifyUserUseCase;
-import com.iesam.digitallibrary.feature.user.domain.User;
+import com.iesam.digitallibrary.feature.user.domain.*;
 
-import com.iesam.digitallibrary.feature.user.domain.GetUsersListUseCase;
 import com.iesam.digitallibrary.feature.user.domain.User;
 
 import java.util.ArrayList;
@@ -25,6 +21,7 @@ public class UserPresentation {
             System.out.println("2. Visualizar usuario.");
             System.out.println("3. Visualizar la lista completa de usuarios registrados.");
             System.out.println("4. Modificar usuario.");
+            System.out.println("5. Eliminar usuario.");
             System.out.println("10. Salir.");
             System.out.println("Elige una opción: ");
 
@@ -32,17 +29,20 @@ public class UserPresentation {
 
             switch (choice) {
                 case 1:
-                    UserPresentation.addUser();
+                    addUser();
                     System.out.println("Usuario creado.");
                     break;
                 case 2:
-                    UserPresentation.viewUser();
+                    viewUser();
                     break;
                 case 3:
-                    UserPresentation.getUsersList();
+                    getUsersList();
                     break;
                 case 4:
-                    UserPresentation.modifyUser();
+                    modifyUser();
+                    break;
+                case 5:
+                    deleteUser();
                     break;
             }
         }
@@ -96,6 +96,7 @@ public class UserPresentation {
             System.out.println(user);
         }
     }
+
     public static void modifyUser() {
         Scanner scanner = new Scanner(System.in);
 
@@ -116,7 +117,17 @@ public class UserPresentation {
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
         ModifyUserUseCase modifyUserUseCase = new ModifyUserUseCase(userDataRepository);
 
-        User user = new User(userCode,dni,name,lastName,phoneNumber,address);
+        User user = new User(userCode, dni, name, lastName, phoneNumber, address);
         modifyUserUseCase.execute(user);
+    }
+
+    public static void deleteUser() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escribe el codigo de usuario del usuario que quieras eliminar. ");
+        String userCode = scanner.next();
+
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(userDataRepository);
+        deleteUserUseCase.execute(userCode);
     }
 }
