@@ -20,4 +20,10 @@ public class DigitalBookDataRepository implements DigitalBookRepository {
         return digitalBookLocalDataSource.findById(id);
     }
 
+    @Override
+    public void deleteDigitalBook(String id) {
+        digitalBookLocalDataSource.delete(id);
+    }
+
+
 }
