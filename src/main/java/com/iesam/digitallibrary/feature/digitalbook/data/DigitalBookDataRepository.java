@@ -14,4 +14,10 @@ public class DigitalBookDataRepository implements DigitalBookRepository {
     public void saveDigitalBook(DigitalBook digitalBook) {
         digitalBookLocalDataSource.save(digitalBook);
     }
+
+    @Override
+    public DigitalBook getDigitalBook(String id) {
+        return digitalBookLocalDataSource.findById(id);
+    }
+
 }
