@@ -18,6 +18,7 @@ public class DigitalBookPresentation {
             System.out.println("1. Guardar libro digital.");
             System.out.println("2. Obtener libro digital.");
             System.out.println("3. Eliminar libro digital.");
+            System.out.println("4. Modificar libro digital.");
             choice = scanner.nextInt();
 
             switch (choice) {
