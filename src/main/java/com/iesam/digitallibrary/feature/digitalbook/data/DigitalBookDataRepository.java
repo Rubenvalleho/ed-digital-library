@@ -4,6 +4,8 @@ import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookLocalD
 import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
 import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBookRepository;
 
+import java.util.List;
+
 public class DigitalBookDataRepository implements DigitalBookRepository {
     private DigitalBookLocalDataSource digitalBookLocalDataSource;
     public DigitalBookDataRepository(DigitalBookLocalDataSource digitalBookLocalDataSource) {
@@ -28,6 +30,11 @@ public class DigitalBookDataRepository implements DigitalBookRepository {
     @Override
     public void modifyDigitalBook(DigitalBook digitalBook) {
         digitalBookLocalDataSource.modify(digitalBook);
+    }
+
+    @Override
+    public List<DigitalBook> getAllDigitalBooks() {
+        return digitalBookLocalDataSource.findAll();
     }
 
 }
