@@ -4,7 +4,8 @@ import com.iesam.digitallibrary.feature.digitalbook.data.DigitalBookDataReposito
 import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookFileLocalDataSource;
 import com.iesam.digitallibrary.feature.digitalbook.domain.CreateDigitalBookUseCase;
 import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
-
+import com.iesam.digitallibrary.feature.digitalbook.domain.GetDigitalBookUseCase;
+import com.iesam.digitallibrary.feature.digitalbook.domain.DeleteDigitalBookUseCase;
 import java.util.Scanner;
 
 public class DigitalBookPresentation {
