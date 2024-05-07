@@ -30,6 +30,9 @@ public class DigitalBookPresentation {
                 case 3:
                     deleteDigitalBook();
                     break;
+                case 4:
+                    modifyDigitalBook();
+                    break;
             }
         } while (choice != 10);
     }
