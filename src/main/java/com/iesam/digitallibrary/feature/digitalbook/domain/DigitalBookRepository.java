@@ -4,4 +4,5 @@ public interface DigitalBookRepository {
     void saveDigitalBook(DigitalBook digitalBook);
     DigitalBook getDigitalBook(String id);
     void deleteDigitalBook(String id);
+    void modifyDigitalBook(DigitalBook digitalBook);
 }
