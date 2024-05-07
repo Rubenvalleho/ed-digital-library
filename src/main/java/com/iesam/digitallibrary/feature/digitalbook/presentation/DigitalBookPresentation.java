@@ -18,12 +18,20 @@ public class DigitalBookPresentation {
             System.out.println("Menú de libros digitales.");
             System.out.println("-------------------------");
             System.out.println("1. Guardar libro digital.");
+            System.out.println("2. Obtener libro digital.");
+            System.out.println("3. Eliminar libro digital.");
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                  saveDigitalBook();
-                  break;
+                    saveDigitalBook();
+                    break;
+                case 2:
+                    getDigitalBook();
+                    break;
+                case 3:
+                    deleteDigitalBook();
+                    break;
             }
         } while (choice != 10);
     }
