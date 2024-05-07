@@ -2,10 +2,8 @@ package com.iesam.digitallibrary.feature.digitalbook.presentation;
 
 import com.iesam.digitallibrary.feature.digitalbook.data.DigitalBookDataRepository;
 import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookFileLocalDataSource;
-import com.iesam.digitallibrary.feature.digitalbook.domain.CreateDigitalBookUseCase;
-import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
-import com.iesam.digitallibrary.feature.digitalbook.domain.GetDigitalBookUseCase;
-import com.iesam.digitallibrary.feature.digitalbook.domain.DeleteDigitalBookUseCase;
+import com.iesam.digitallibrary.feature.digitalbook.domain.*;
+
 import java.util.Scanner;
 
 public class DigitalBookPresentation {
@@ -20,6 +18,7 @@ public class DigitalBookPresentation {
             System.out.println("1. Guardar libro digital.");
             System.out.println("2. Obtener libro digital.");
             System.out.println("3. Eliminar libro digital.");
+            System.out.println("4. Modificar libro digital.");
             choice = scanner.nextInt();
 
             switch (choice) {
@@ -31,6 +30,9 @@ public class DigitalBookPresentation {
                     break;
                 case 3:
                     deleteDigitalBook();
+                    break;
+                case 4:
+                    modifyDigitalBook();
                     break;
             }
         } while (choice != 10);
@@ -79,5 +81,27 @@ public class DigitalBookPresentation {
         deleteDigitalBookUseCase.execute(id);
         System.out.println("Libro digital eliminado con exito.");
 
+    }
+
+    public static void modifyDigitalBook() {
+        Scanner scanner = new Scanner(System.in);
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
+        ModifyDigitalBookUseCase modifyDigitalBookUseCase = new ModifyDigitalBookUseCase(digitalBookDataRepository);
+
+        System.out.println("Introduce el id del libro digital a modificar: ");
+        String id = scanner.next();
+        System.out.println("Introduce el titulo: ");
+        String title = scanner.next();
+        System.out.println("Introduce el autor: ");
+        String author = scanner.next();
+        System.out.println("Introduce la editorial: ");
+        String editorial = scanner.next();
+        System.out.println("Introduce la fecha de salida: ");
+        String releaseDate = scanner.next();
+
+        DigitalBook digitalBook = new DigitalBook(id,title,author,editorial,releaseDate);
+
+        modifyDigitalBookUseCase.execute(digitalBook);
+        System.out.println("Libro digital modificado con exito.");
     }
 }
