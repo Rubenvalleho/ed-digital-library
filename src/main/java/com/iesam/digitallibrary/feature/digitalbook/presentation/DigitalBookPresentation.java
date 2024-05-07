@@ -3,9 +3,7 @@ package com.iesam.digitallibrary.feature.digitalbook.presentation;
 import com.iesam.digitallibrary.feature.digitalbook.data.DigitalBookDataRepository;
 import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookFileLocalDataSource;
 import com.iesam.digitallibrary.feature.digitalbook.domain.CreateDigitalBookUseCase;
-import com.iesam.digitallibrary.feature.digitalbook.domain.DeleteDigitalBookUseCase;
 import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
-import com.iesam.digitallibrary.feature.digitalbook.domain.GetDigitalBookUseCase;
 
 import java.util.Scanner;
 
@@ -19,20 +17,12 @@ public class DigitalBookPresentation {
             System.out.println("Menú de libros digitales.");
             System.out.println("-------------------------");
             System.out.println("1. Guardar libro digital.");
-            System.out.println("2. Obtener libro digital.");
-            System.out.println("3. Eliminar libro digital.");
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
-                    saveDigitalBook();
-                    break;
-                case 2:
-                    getDigitalBook();
-                    break;
-                case 3:
-                    deleteDigitalBook();
-                    break;
+                  saveDigitalBook();
+                  break;
             }
         } while (choice != 10);
     }
