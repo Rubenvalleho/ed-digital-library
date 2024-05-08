@@ -4,6 +4,8 @@ import com.iesam.digitallibrary.feature.digitalbook.data.DigitalBookDataReposito
 import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookFileLocalDataSource;
 import com.iesam.digitallibrary.feature.digitalbook.domain.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DigitalBookPresentation {
@@ -19,6 +21,8 @@ public class DigitalBookPresentation {
             System.out.println("2. Obtener libro digital.");
             System.out.println("3. Eliminar libro digital.");
             System.out.println("4. Modificar libro digital.");
+            System.out.println("5. Obtener todos los libros digitales.");
+            System.out.println("10. Salir");
             choice = scanner.nextInt();
 
             switch (choice) {
@@ -33,6 +37,9 @@ public class DigitalBookPresentation {
                     break;
                 case 4:
                     modifyDigitalBook();
+                    break;
+                case 5:
+                    getAllDigitalBooks();
                     break;
             }
         } while (choice != 10);
@@ -103,5 +110,17 @@ public class DigitalBookPresentation {
 
         modifyDigitalBookUseCase.execute(digitalBook);
         System.out.println("Libro digital modificado con exito.");
+    }
+
+    public static void getAllDigitalBooks() {
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
+        GetAllDigitalBooksUseCase getAllDigitalBooksUseCase = new GetAllDigitalBooksUseCase(digitalBookDataRepository);
+
+        List<DigitalBook> allDigitalBooks = getAllDigitalBooksUseCase.execute();
+
+        for (DigitalBook digitalBook : allDigitalBooks) {
+            System.out.println(digitalBook);
+        }
+
     }
 }
