@@ -1,0 +1,68 @@
+package com.iesam.digitallibrary.feature.loan.presentation;
+
+import com.iesam.digitallibrary.feature.digitalbook.data.DigitalBookDataRepository;
+import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookFileLocalDataSource;
+import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
+import com.iesam.digitallibrary.feature.digitalbook.domain.GetDigitalBookUseCase;
+import com.iesam.digitallibrary.feature.loan.data.LoanDataRepository;
+import com.iesam.digitallibrary.feature.loan.data.local.LoanFileLocalDataSource;
+import com.iesam.digitallibrary.feature.loan.domain.CreateLoanUseCase;
+import com.iesam.digitallibrary.feature.loan.domain.Loan;
+import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
+import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
+import com.iesam.digitallibrary.feature.user.domain.User;
+
+import java.util.Scanner;
+
+public class LoanPresentation {
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void menuLoan() {
+        int choice;
+
+        do {
+            System.out.println("\nMenú de prestamos.");
+            System.out.println("--------------------");
+            System.out.println("1. Conceder prestamo.");
+            System.out.println("0. Salir.");
+            choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    addLoan();
+                    break;
+            }
+        } while (choice != 0);
+    }
+
+    public static void addLoan() {
+        LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
+        CreateLoanUseCase createLoanUseCase = new CreateLoanUseCase(loanDataRepository);
+
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        GetUserUseCase getUserUseCase = new GetUserUseCase(userDataRepository);
+
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
+                                                                        new DigitalBookFileLocalDataSource());
+        GetDigitalBookUseCase getDigitalBookUseCase = new GetDigitalBookUseCase(digitalBookDataRepository);
+
+        System.out.println("Inserta el ID del prestamo.");
+        String loanId = scanner.next();
+        System.out.println("Inserta el codigo de usuario que solicita el prestamo.");
+        String userCode = scanner.next();
+        System.out.println("Inserta el ID del libro digital solicitado.");
+        String digitalBookId = scanner.next();
+        System.out.println("Inserta la fecha de solicitud del prestamo.");
+        String initialLoanDate = scanner.next();
+        System.out.println("Inserta la fecha de devolución del libro digital prestado.");
+        String returnDate = scanner.next();
+
+        User user = getUserUseCase.execute(userCode);
+        DigitalBook digitalBook = getDigitalBookUseCase.execute(digitalBookId);
+
+        Loan loan = new Loan(loanId,user,digitalBook,initialLoanDate,returnDate);
+        createLoanUseCase.execute(loan);
+        System.out.println("Prestamo concedido con exito.");
+    }
+}
