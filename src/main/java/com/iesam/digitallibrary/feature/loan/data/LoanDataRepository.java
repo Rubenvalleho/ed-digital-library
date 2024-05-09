@@ -28,4 +28,9 @@ public class LoanDataRepository implements LoanRepository {
         loanLocalDataSource.modify(loan);
     }
 
+    @Override
+    public Loan getLoan(String id) {
+        return loanLocalDataSource.findById(id);
+    }
+
 }

@@ -6,10 +6,7 @@ import com.iesam.digitallibrary.feature.digitalbook.domain.DigitalBook;
 import com.iesam.digitallibrary.feature.digitalbook.domain.GetDigitalBookUseCase;
 import com.iesam.digitallibrary.feature.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.feature.loan.data.local.LoanFileLocalDataSource;
-import com.iesam.digitallibrary.feature.loan.domain.CreateLoanUseCase;
-import com.iesam.digitallibrary.feature.loan.domain.DeleteLoanUseCase;
-import com.iesam.digitallibrary.feature.loan.domain.FinishLoanUseCase;
-import com.iesam.digitallibrary.feature.loan.domain.Loan;
+import com.iesam.digitallibrary.feature.loan.domain.*;
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
@@ -29,6 +26,7 @@ public class LoanPresentation {
             System.out.println("1. Conceder prestamo.");
             System.out.println("2. Eliminar prestamo.");
             System.out.println("3. Finalizar prestamo.");
+            System.out.println("4. Obtener prestamo.");
             System.out.println("0. Salir.");
             choice = scanner.nextInt();
 
@@ -41,6 +39,9 @@ public class LoanPresentation {
                     break;
                 case 3:
                     finishLoan();
+                    break;
+                case 4:
+                    getLoan();
                     break;
             }
         } while (choice != 0);
@@ -95,5 +96,16 @@ public class LoanPresentation {
         String id = scanner.next();
 
         finishLoanUseCase.execute(id);
+    }
+
+    public static void getLoan() {
+        LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
+        GetLoanUseCase getLoanUseCase = new GetLoanUseCase(loanDataRepository);
+
+        System.out.println("Introduce el ID del fichero a visualizar");
+        String id = scanner.next();
+
+        Loan loan = getLoanUseCase.execute(id);
+        System.out.println(loan);
     }
 }
