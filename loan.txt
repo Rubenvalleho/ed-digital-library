@@ -1,1 +1,1 @@
-[{"id":"1","user":{"userCode":"001","dni":"708","name":"Rubén","lastName":"Vallejo","phoneNumber":"644","address":"Calle"},"digitalBook":{"id":"1","title":"Amanecer_rojo","author":"Pierce_Brown","editorial":"RNA","releaseDate":"Hoy"},"loanInitialDate":"hoy","returnDate":"mañana","finalized":false}]
+[]
