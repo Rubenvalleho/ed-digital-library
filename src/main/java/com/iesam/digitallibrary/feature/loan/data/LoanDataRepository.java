@@ -18,5 +18,4 @@ public class LoanDataRepository implements LoanRepository {
         loanLocalDataSource.save(loan);
     }
 
-
 }

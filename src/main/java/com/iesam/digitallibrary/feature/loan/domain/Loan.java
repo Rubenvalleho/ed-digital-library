@@ -9,7 +9,7 @@ public class Loan {
     public final DigitalBook digitalBook;
     public final String loanInitialDate;
     public final String returnDate;
-    public final Boolean returned;
+    public final Boolean finalized;
 
     public Loan(String id, User user, DigitalBook digitalBook, String loanInitialDate, String loanFinalDate) {
         this.id = id;
@@ -17,7 +17,7 @@ public class Loan {
         this.digitalBook = digitalBook;
         this.loanInitialDate = loanInitialDate;
         this.returnDate = loanFinalDate;
-        this.returned = false;
+        this.finalized = false;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Loan {
                 ", Libro digital=" + digitalBook +
                 ", Fecha de prestamo='" + loanInitialDate + '\'' +
                 ", Fecha de devolución='" + returnDate + '\'' +
-                ", ¿Devuelto?=" + returned +
+                ", ¿Devuelto?=" + finalized +
                 '}';
     }
 }

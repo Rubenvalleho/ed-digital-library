@@ -1,1 +1,1 @@
-[]
+[{"userCode":"001","dni":"708","name":"Rubén","lastName":"Vallejo","phoneNumber":"644","address":"Calle"}]
