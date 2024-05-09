@@ -8,6 +8,7 @@ import com.iesam.digitallibrary.feature.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.feature.loan.data.local.LoanFileLocalDataSource;
 import com.iesam.digitallibrary.feature.loan.domain.CreateLoanUseCase;
 import com.iesam.digitallibrary.feature.loan.domain.DeleteLoanUseCase;
+import com.iesam.digitallibrary.feature.loan.domain.FinishLoanUseCase;
 import com.iesam.digitallibrary.feature.loan.domain.Loan;
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
@@ -27,6 +28,7 @@ public class LoanPresentation {
             System.out.println("--------------------");
             System.out.println("1. Conceder prestamo.");
             System.out.println("2. Eliminar prestamo.");
+            System.out.println("3. Finalizar prestamo.");
             System.out.println("0. Salir.");
             choice = scanner.nextInt();
 
@@ -36,6 +38,9 @@ public class LoanPresentation {
                     break;
                 case 2:
                     deleteLoan();
+                    break;
+                case 3:
+                    finishLoan();
                     break;
             }
         } while (choice != 0);
@@ -80,5 +85,15 @@ public class LoanPresentation {
 
         deleteLoanUseCase.execute(loanId);
         System.out.println("Prestamo eliminado con exito.");
+    }
+
+    public static void finishLoan() {
+        LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
+        FinishLoanUseCase finishLoanUseCase = new FinishLoanUseCase(loanDataRepository);
+
+        System.out.println("Inserta el ID del préstamo a finalizar.");
+        String id = scanner.next();
+
+        finishLoanUseCase.execute(id);
     }
 }

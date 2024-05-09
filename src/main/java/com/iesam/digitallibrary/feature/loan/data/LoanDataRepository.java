@@ -23,4 +23,9 @@ public class LoanDataRepository implements LoanRepository {
         loanLocalDataSource.delete(id);
     }
 
+    @Override
+    public void finishLoan(Loan loan) {
+        loanLocalDataSource.modify(loan);
+    }
+
 }
