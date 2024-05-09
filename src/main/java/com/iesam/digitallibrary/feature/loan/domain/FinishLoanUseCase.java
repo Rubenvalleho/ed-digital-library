@@ -10,7 +10,8 @@ public class FinishLoanUseCase {
     }
 
     public void execute (String id) {
-        Loan loan =
-        loanRepository.finishLoan();
+        Loan loan = loanRepository.getLoan(id);
+        Loan loanFinished = new Loan(loan.id, loan.user,loan.digitalBook, loan.loanInitialDate, loan.returnDate, true);
+        loanRepository.finishLoan(loanFinished);
     }
 }

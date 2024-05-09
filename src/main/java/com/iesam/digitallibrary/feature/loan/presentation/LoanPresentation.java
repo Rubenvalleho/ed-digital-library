@@ -96,6 +96,7 @@ public class LoanPresentation {
         String id = scanner.next();
 
         finishLoanUseCase.execute(id);
+        System.out.println("Prestamo finalizado.");
     }
 
     public static void getLoan() {
