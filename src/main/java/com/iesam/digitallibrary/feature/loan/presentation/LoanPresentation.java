@@ -12,6 +12,8 @@ import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
 import com.iesam.digitallibrary.feature.user.domain.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LoanPresentation {
@@ -27,6 +29,7 @@ public class LoanPresentation {
             System.out.println("2. Eliminar prestamo.");
             System.out.println("3. Finalizar prestamo.");
             System.out.println("4. Obtener prestamo.");
+            System.out.println("5. Visualizar prestamos finalizados.");
             System.out.println("0. Salir.");
             choice = scanner.nextInt();
 
@@ -42,6 +45,9 @@ public class LoanPresentation {
                     break;
                 case 4:
                     getLoan();
+                    break;
+                case 5:
+                    getFinalizedLoans();
                     break;
             }
         } while (choice != 0);
@@ -108,5 +114,16 @@ public class LoanPresentation {
 
         Loan loan = getLoanUseCase.execute(id);
         System.out.println(loan);
+    }
+
+    public static void getFinalizedLoans() {
+        LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
+        GetFinalizedLoansUseCase getFinalizedLoansUseCase = new GetFinalizedLoansUseCase(loanDataRepository);
+
+        List<Loan> finalizedLoans = getFinalizedLoansUseCase.execute();
+
+        for (Loan loan : finalizedLoans) {
+            System.out.println(loan);
+        }
     }
 }
