@@ -49,7 +49,7 @@ public class LoanPresentation {
         GetUserUseCase getUserUseCase = new GetUserUseCase(userDataRepository);
 
         DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
-                                                                        new DigitalBookFileLocalDataSource());
+                new DigitalBookFileLocalDataSource());
         GetDigitalBookUseCase getDigitalBookUseCase = new GetDigitalBookUseCase(digitalBookDataRepository);
 
         System.out.println("Inserta el ID del prestamo.");
@@ -66,7 +66,7 @@ public class LoanPresentation {
         User user = getUserUseCase.execute(userCode);
         DigitalBook digitalBook = getDigitalBookUseCase.execute(digitalBookId);
 
-        Loan loan = new Loan(loanId,user,digitalBook,initialLoanDate,returnDate);
+        Loan loan = new Loan(loanId, user, digitalBook, initialLoanDate, returnDate, true);
         createLoanUseCase.execute(loan);
         System.out.println("Prestamo concedido con exito.");
     }
