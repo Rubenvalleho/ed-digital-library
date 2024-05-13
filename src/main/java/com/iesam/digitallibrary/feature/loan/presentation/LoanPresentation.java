@@ -7,6 +7,7 @@ import com.iesam.digitallibrary.feature.digitalbook.domain.GetDigitalBookUseCase
 import com.iesam.digitallibrary.feature.loan.data.LoanDataRepository;
 import com.iesam.digitallibrary.feature.loan.data.local.LoanFileLocalDataSource;
 import com.iesam.digitallibrary.feature.loan.domain.CreateLoanUseCase;
+import com.iesam.digitallibrary.feature.loan.domain.DeleteLoanUseCase;
 import com.iesam.digitallibrary.feature.loan.domain.Loan;
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
@@ -25,12 +26,16 @@ public class LoanPresentation {
             System.out.println("\nMenú de prestamos.");
             System.out.println("--------------------");
             System.out.println("1. Conceder prestamo.");
+            System.out.println("2. Eliminar prestamo.");
             System.out.println("0. Salir.");
             choice = scanner.nextInt();
 
             switch (choice) {
                 case 1:
                     addLoan();
+                    break;
+                case 2:
+                    deleteLoan();
                     break;
             }
         } while (choice != 0);
@@ -44,7 +49,7 @@ public class LoanPresentation {
         GetUserUseCase getUserUseCase = new GetUserUseCase(userDataRepository);
 
         DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
-                                                                        new DigitalBookFileLocalDataSource());
+                new DigitalBookFileLocalDataSource());
         GetDigitalBookUseCase getDigitalBookUseCase = new GetDigitalBookUseCase(digitalBookDataRepository);
 
         System.out.println("Inserta el ID del prestamo.");
@@ -61,8 +66,19 @@ public class LoanPresentation {
         User user = getUserUseCase.execute(userCode);
         DigitalBook digitalBook = getDigitalBookUseCase.execute(digitalBookId);
 
-        Loan loan = new Loan(loanId,user,digitalBook,initialLoanDate,returnDate);
+        Loan loan = new Loan(loanId, user, digitalBook, initialLoanDate, returnDate, true);
         createLoanUseCase.execute(loan);
         System.out.println("Prestamo concedido con exito.");
+    }
+
+    public static void deleteLoan() {
+        LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
+        DeleteLoanUseCase deleteLoanUseCase = new DeleteLoanUseCase(loanDataRepository);
+
+        System.out.println("Introduce el ID del prestamo a eliminar.");
+        String loanId = scanner.next();
+
+        deleteLoanUseCase.execute(loanId);
+        System.out.println("Prestamo eliminado con exito.");
     }
 }
