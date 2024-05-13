@@ -28,8 +28,9 @@ public class LoanPresentation {
             System.out.println("1. Conceder prestamo.");
             System.out.println("2. Eliminar prestamo.");
             System.out.println("3. Finalizar prestamo.");
-            System.out.println("4. Obtener prestamo.");
+            System.out.println("4. Visualizar prestamo.");
             System.out.println("5. Visualizar prestamos finalizados.");
+            System.out.println("6. Visualizar prestamos en curso.");
             System.out.println("0. Salir.");
             choice = scanner.nextInt();
 
@@ -48,6 +49,9 @@ public class LoanPresentation {
                     break;
                 case 5:
                     getFinalizedLoans();
+                    break;
+                case 6:
+                    getNotFinalizedLoans();
                     break;
             }
         } while (choice != 0);
@@ -78,7 +82,7 @@ public class LoanPresentation {
         User user = getUserUseCase.execute(userCode);
         DigitalBook digitalBook = getDigitalBookUseCase.execute(digitalBookId);
 
-        Loan loan = new Loan(loanId, user, digitalBook, initialLoanDate, returnDate, true);
+        Loan loan = new Loan(loanId, user, digitalBook, initialLoanDate, returnDate, false);
         createLoanUseCase.execute(loan);
         System.out.println("Prestamo concedido con exito.");
     }
@@ -123,6 +127,17 @@ public class LoanPresentation {
         List<Loan> finalizedLoans = getFinalizedLoansUseCase.execute();
 
         for (Loan loan : finalizedLoans) {
+            System.out.println(loan);
+        }
+    }
+
+    public static void getNotFinalizedLoans() {
+        LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
+        GetNotFinalizedLoansUseCase getNotFinalizedLoansUseCase = new GetNotFinalizedLoansUseCase(loanDataRepository);
+
+        List<Loan> notFinalizedLoans = getNotFinalizedLoansUseCase.execute();
+
+        for(Loan loan: notFinalizedLoans) {
             System.out.println(loan);
         }
     }
