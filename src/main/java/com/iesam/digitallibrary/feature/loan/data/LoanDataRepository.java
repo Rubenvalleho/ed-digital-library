@@ -33,4 +33,9 @@ public class LoanDataRepository implements LoanRepository {
         return loanLocalDataSource.findById(id);
     }
 
+    @Override
+    public List<Loan> getAllLoans() {
+        return loanLocalDataSource.findAll();
+    }
+
 }
