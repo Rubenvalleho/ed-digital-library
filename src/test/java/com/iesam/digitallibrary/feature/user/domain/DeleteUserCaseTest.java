@@ -2,6 +2,7 @@ package com.iesam.digitallibrary.feature.user.domain;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -25,6 +26,7 @@ public class DeleteUserCaseTest {
         deleteUserUseCase = null;
     }
 
+    @Test
     public void obtengoUnCodigoDeUsuarioYEliminoDichoUsuario() {
         String userCodeToDelete = "1";
 
