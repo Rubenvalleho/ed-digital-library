@@ -46,6 +46,7 @@ public class GetUsersListUseCaseTest {
         ArrayList<User> listReceived = getUsersListUseCase.execute();
 
         Assertions.assertNotNull(listReceived);
+        Assertions.assertEquals(listReceived.size(),listExpected.size());
         Assertions.assertEquals("1", listReceived.get(0).userCode);
         Assertions.assertEquals("2", listReceived.get(1).userCode);
     }
