@@ -1,1 +1,1 @@
-[{"id":"1","title":"Amanecer_rojo","author":"Pierce_Brown","editorial":"RNA","releaseDate":"Hoy"},{"id":"2","title":"Hijo_dorado","author":"Pierce_Brown","editorial":"RNA","releaseDate":"Ayer"}]
+[{"id":"1","title":"Amanecer_rojo","author":"Pierce_Brown","editorial":"RNA","releaseDate":"Hoy"},{"id":"2","title":"Hijo_dorado","author":"Pierce_Brown","editorial":"RNA","releaseDate":"Ayer"},{"id":"002","title":"Hijo_dorado","author":"Pierce_Brown","editorial":"RNA","releaseDate":"Ayer"}]
