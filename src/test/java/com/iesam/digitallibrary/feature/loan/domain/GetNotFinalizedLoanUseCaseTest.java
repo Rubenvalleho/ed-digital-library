@@ -1,6 +1,7 @@
 package com.iesam.digitallibrary.feature.loan.domain;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,5 +41,8 @@ public class GetNotFinalizedLoanUseCaseTest {
         Mockito.when(loanRepository.getAllLoans()).thenReturn(allLoans);
 
         List<Loan> notFinalizedLoans = getNotFinalizedLoansUseCase.execute();
+
+        Assertions.assertEquals(notFinalizedLoans.size(),1);
+        Assertions.assertFalse(notFinalizedLoans.get(0).finalized);
     }
 }

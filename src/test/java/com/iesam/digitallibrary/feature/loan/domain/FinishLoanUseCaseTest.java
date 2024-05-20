@@ -16,14 +16,15 @@ public class FinishLoanUseCaseTest {
     @Mock
     LoanRepository loanRepository;
 
-    FinishLoanUseCase finishLoanUseCase;
-
     @Mock
     LoanFactory loanFactory;
 
+    FinishLoanUseCase finishLoanUseCase;
+
+
     @BeforeEach
     public void setUp() {
-        finishLoanUseCase = new FinishLoanUseCase(loanRepository);
+        finishLoanUseCase = new FinishLoanUseCase(loanRepository, loanFactory);
     }
 
     @AfterEach
@@ -33,16 +34,14 @@ public class FinishLoanUseCaseTest {
 
     @Test
     public void reciboUnCodigoDePrestamoYEntoncesLoFinalizo() {
-        Loan loanNotFinalized = new Loan("001",null,null,null,null,false);
+        Loan loanNotFinalized = new Loan("001", null, null, null, null, false);
         Mockito.when(loanRepository.getLoan("001")).thenReturn(loanNotFinalized);
-        Mockito.when()
-        String loanCode = "001";
-        Mockito.when(loanFactory.build("001", null, null, null, null, true)).thenReturn(loanNotFinalized);
+        Loan loanFinalized = new Loan("001", null, null, null, null, true);
+        Mockito.when(loanFactory.build("001", null, null, null, null, true)).thenReturn(loanFinalized);
 
-        finishLoanUseCase.execute(loanCode);
+        finishLoanUseCase.execute("001");
 
-        Mockito.verify(loanRepository, Mockito.times(1)).finishLoan(Mockito.any(Loan.class));
-        Assertions.assertEquals(loanReceived.id, "001");
-        Assertions.assertTrue(loanReceived.finalized);
+        Mockito.verify(loanRepository, Mockito.times(1)).finishLoan(loanFinalized);
+
     }
 }
