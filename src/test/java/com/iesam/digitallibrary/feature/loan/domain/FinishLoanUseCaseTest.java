@@ -34,10 +34,10 @@ public class FinishLoanUseCaseTest {
 
     @Test
     public void reciboUnCodigoDePrestamoYEntoncesLoFinalizo() {
-        Loan loanNotFinalized = new Loan("001", null, null, null, null, false);
+        Loan loanNotFinalized = new Loan(null, null, false);
         Mockito.when(loanRepository.getLoan("001")).thenReturn(loanNotFinalized);
-        Loan loanFinalized = new Loan("001", null, null, null, null, true);
-        Mockito.when(loanFactory.build("001", null, null, null, null, true)).thenReturn(loanFinalized);
+        Loan loanFinalized = new Loan(null, null,true);
+        Mockito.when(loanFactory.buildFinalizedLoan(loanNotFinalized)).thenReturn(loanFinalized);
 
         finishLoanUseCase.execute("001");
 

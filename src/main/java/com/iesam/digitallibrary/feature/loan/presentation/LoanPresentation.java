@@ -82,7 +82,7 @@ public class LoanPresentation {
         User user = getUserUseCase.execute(userCode);
         DigitalBook digitalBook = getDigitalBookUseCase.execute(digitalBookId);
 
-        Loan loan = new Loan(loanId, user, digitalBook, initialLoanDate, returnDate, false);
+        Loan loan = new Loan(user, digitalBook, false);
         createLoanUseCase.execute(loan);
         System.out.println("Prestamo concedido con exito.");
     }
