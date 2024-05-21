@@ -100,7 +100,8 @@ public class LoanPresentation {
 
     public static void finishLoan() {
         LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
-        FinishLoanUseCase finishLoanUseCase = new FinishLoanUseCase(loanDataRepository);
+        LoanFactory loanFactory = new LoanFactory();
+        FinishLoanUseCase finishLoanUseCase = new FinishLoanUseCase(loanDataRepository, loanFactory);
 
         System.out.println("Inserta el ID del préstamo a finalizar.");
         String id = scanner.next();
