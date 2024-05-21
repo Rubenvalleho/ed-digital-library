@@ -7,9 +7,9 @@ public class FinishLoanUseCase {
 
     private LoanFactory factory;
 
-    public FinishLoanUseCase(LoanRepository loanRepository, LoanFactory loanFactory) {
+    public FinishLoanUseCase(LoanRepository loanRepository, LoanFactory factory) {
         this.loanRepository = loanRepository;
-        this.factory = loanFactory;
+        this.factory = factory;
     }
 
     public void execute (String id) {
