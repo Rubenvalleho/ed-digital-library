@@ -68,16 +68,10 @@ public class LoanPresentation {
                 new DigitalBookFileLocalDataSource());
         GetDigitalBookUseCase getDigitalBookUseCase = new GetDigitalBookUseCase(digitalBookDataRepository);
 
-        System.out.println("Inserta el ID del prestamo.");
-        String loanId = scanner.next();
         System.out.println("Inserta el codigo de usuario que solicita el prestamo.");
         String userCode = scanner.next();
         System.out.println("Inserta el ID del libro digital solicitado.");
         String digitalBookId = scanner.next();
-        System.out.println("Inserta la fecha de solicitud del prestamo.");
-        String initialLoanDate = scanner.next();
-        System.out.println("Inserta la fecha de devolución del libro digital prestado.");
-        String returnDate = scanner.next();
 
         User user = getUserUseCase.execute(userCode);
         DigitalBook digitalBook = getDigitalBookUseCase.execute(digitalBookId);
