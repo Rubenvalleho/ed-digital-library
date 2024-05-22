@@ -59,25 +59,19 @@ public class LoanPresentation {
 
     public static void addLoan() {
         LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
-        CreateLoanUseCase createLoanUseCase = new CreateLoanUseCase(loanDataRepository);
-
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
-        GetUserUseCase getUserUseCase = new GetUserUseCase(userDataRepository);
-
         DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
                 new DigitalBookFileLocalDataSource());
-        GetDigitalBookUseCase getDigitalBookUseCase = new GetDigitalBookUseCase(digitalBookDataRepository);
+        LoanFactory loanFactory = new LoanFactory();
+        CreateLoanUseCase createLoanUseCase = new CreateLoanUseCase(loanDataRepository, loanFactory, userDataRepository,
+                digitalBookDataRepository);
 
         System.out.println("Inserta el codigo de usuario que solicita el prestamo.");
         String userCode = scanner.next();
         System.out.println("Inserta el ID del libro digital solicitado.");
         String digitalBookId = scanner.next();
 
-        User user = getUserUseCase.execute(userCode);
-        DigitalBook digitalBook = getDigitalBookUseCase.execute(digitalBookId);
-
-        Loan loan = new Loan(user, digitalBook, false);
-        createLoanUseCase.execute(loan);
+        createLoanUseCase.execute(userCode, digitalBookId);
         System.out.println("Prestamo concedido con exito.");
     }
 
@@ -112,7 +106,12 @@ public class LoanPresentation {
         String id = scanner.next();
 
         Loan loan = getLoanUseCase.execute(id);
-        System.out.println(loan);
+
+        if (loan == null) {
+            System.err.println("No existe ningún prestamo con ese ID");
+        } else {
+            System.out.println(loan);
+        }
     }
 
     public static void getFinalizedLoans() {
@@ -121,9 +120,14 @@ public class LoanPresentation {
 
         List<Loan> finalizedLoans = getFinalizedLoansUseCase.execute();
 
-        for (Loan loan : finalizedLoans) {
-            System.out.println(loan);
+        if (finalizedLoans == null) {
+            System.err.println("No hay ningún prestamo finalizado actualmente.");
+        } else {
+            for (Loan loan : finalizedLoans) {
+                System.out.println(loan);
+            }
         }
+
     }
 
     public static void getNotFinalizedLoans() {
@@ -132,8 +136,13 @@ public class LoanPresentation {
 
         List<Loan> notFinalizedLoans = getNotFinalizedLoansUseCase.execute();
 
-        for(Loan loan: notFinalizedLoans) {
-            System.out.println(loan);
+        if (notFinalizedLoans == null) {
+            System.err.println("No hay prestamos no finalizados actualmente.");
+        } else {
+            for (Loan loan : notFinalizedLoans) {
+                System.out.println(loan);
+            }
         }
+
     }
 }
