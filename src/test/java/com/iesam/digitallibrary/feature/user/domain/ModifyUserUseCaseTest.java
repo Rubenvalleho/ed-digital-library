@@ -14,11 +14,14 @@ public class ModifyUserUseCaseTest {
     @Mock
     UserRepository userRepository;
 
+    @Mock
+    UserFactory userFactory;
+
     ModifyUserUseCase modifyUserUseCase;
 
     @BeforeEach
     public void setUp() {
-        modifyUserUseCase = new ModifyUserUseCase(userRepository);
+        modifyUserUseCase = new ModifyUserUseCase(userRepository, userFactory);
     }
 
     @AfterEach
@@ -28,9 +31,11 @@ public class ModifyUserUseCaseTest {
 
     @Test
     public void obtengoUnUsuarioExistenteYLoModifico() {
-        User user = new User("1",null,null,null,null,null);
+        User user = new User("001", null, null, null, null, null);
+        Mockito.when(userFactory.build("001", null, null, null, null,
+                null)).thenReturn(user);
 
-        modifyUserUseCase.execute(user);
+        modifyUserUseCase.execute("001", null, null, null, null, null);
 
         Mockito.verify(userRepository, Mockito.times(1)).modifyUser(user);
     }
