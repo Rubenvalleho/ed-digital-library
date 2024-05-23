@@ -6,7 +6,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class UserMemLocalDataSource implements UserLocalDataSource{
+public class UserMemLocalDataSource implements UserLocalDataSource {
+
+    private static UserMemLocalDataSource instance = null;
+
+    private UserMemLocalDataSource() {
+
+    }
+
+    public static UserMemLocalDataSource getInstance() {
+        if (instance == null) {
+            instance = new UserMemLocalDataSource();
+        }
+        return instance;
+    }
 
     private Map<String, User> dataStore = new TreeMap<>();
 
@@ -15,13 +28,13 @@ public class UserMemLocalDataSource implements UserLocalDataSource{
     }
 
     public void saveList(List<User> models) {
-        for (User demo : models) {
-            save(demo);
+        for (User user : models) {
+            save(user);
         }
     }
 
-    public User findById(String id) {
-        return dataStore.get(id);
+    public User findById(String userCode) {
+        return dataStore.get(userCode);
     }
 
     public List<User> findAll() {

@@ -2,6 +2,7 @@ package com.iesam.digitallibrary.feature.user.presentation;
 
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.feature.user.data.local.UserMemLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.*;
 
 import com.iesam.digitallibrary.feature.user.domain.User;
@@ -65,7 +66,8 @@ public class UserPresentation {
         System.out.println("Introduce su dirección: ");
         String address = scanner.next();
 
-        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
+                UserMemLocalDataSource.getInstance());
         UserFactory userFactory = new UserFactory();
         CreateUserUseCase createUserUseCase = new CreateUserUseCase(userDataRepository, userFactory);
 
@@ -78,7 +80,8 @@ public class UserPresentation {
         System.out.println("Inserta el codigo del usuario a visualizar.");
         String userCode = scanner.nextLine();
 
-        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
+                UserMemLocalDataSource.getInstance());
         GetUserUseCase getUserUseCase = new GetUserUseCase(userDataRepository);
 
         User user = getUserUseCase.execute(userCode);
@@ -92,7 +95,8 @@ public class UserPresentation {
     }
 
     public static void getUsersList() {
-        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
+                UserMemLocalDataSource.getInstance());
         GetUsersListUseCase getUsersListUseCase = new GetUsersListUseCase(userDataRepository);
 
         ArrayList<User> users = getUsersListUseCase.execute();
@@ -124,7 +128,8 @@ public class UserPresentation {
         System.out.println("Introduce su dirección: ");
         String address = scanner.next();
 
-        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
+                UserMemLocalDataSource.getInstance());
         UserFactory userFactory = new UserFactory();
         ModifyUserUseCase modifyUserUseCase = new ModifyUserUseCase(userDataRepository, userFactory);
 
@@ -136,7 +141,8 @@ public class UserPresentation {
         System.out.println("Escribe el codigo de usuario del usuario que quieras eliminar. ");
         String userCode = scanner.next();
 
-        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
+                UserMemLocalDataSource.getInstance());
         DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(userDataRepository);
         deleteUserUseCase.execute(userCode);
         System.out.println("Usuario eliminado con exito.");

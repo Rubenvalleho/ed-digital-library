@@ -9,6 +9,7 @@ import com.iesam.digitallibrary.feature.loan.data.local.LoanFileLocalDataSource;
 import com.iesam.digitallibrary.feature.loan.domain.*;
 import com.iesam.digitallibrary.feature.user.data.UserDataRepository;
 import com.iesam.digitallibrary.feature.user.data.local.UserFileLocalDataSource;
+import com.iesam.digitallibrary.feature.user.data.local.UserMemLocalDataSource;
 import com.iesam.digitallibrary.feature.user.domain.GetUserUseCase;
 import com.iesam.digitallibrary.feature.user.domain.User;
 
@@ -59,7 +60,8 @@ public class LoanPresentation {
 
     public static void addLoan() {
         LoanDataRepository loanDataRepository = new LoanDataRepository(new LoanFileLocalDataSource());
-        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
+        UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
+                UserMemLocalDataSource.getInstance());
         DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
                 new DigitalBookFileLocalDataSource());
         LoanFactory loanFactory = new LoanFactory();
