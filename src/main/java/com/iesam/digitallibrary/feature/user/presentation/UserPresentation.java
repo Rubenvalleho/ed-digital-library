@@ -92,8 +92,6 @@ public class UserPresentation {
             System.out.println(user);
         }
 
-    }
-
     public static void getUsersList() {
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
                 UserMemLocalDataSource.getInstance());
@@ -108,8 +106,6 @@ public class UserPresentation {
                 System.out.println(user);
             }
         }
-
-    }
 
     public static void modifyUser() {
         Scanner scanner = new Scanner(System.in);

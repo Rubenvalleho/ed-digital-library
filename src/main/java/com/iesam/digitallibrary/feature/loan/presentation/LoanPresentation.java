@@ -137,7 +137,6 @@ public class LoanPresentation {
                 System.out.println(loan);
             }
         }
-
     }
 
     public static void getNotFinalizedLoans() {
@@ -154,6 +153,5 @@ public class LoanPresentation {
                 System.out.println(loan);
             }
         }
-
     }
 }
