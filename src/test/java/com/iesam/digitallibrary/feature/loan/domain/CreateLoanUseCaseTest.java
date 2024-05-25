@@ -28,7 +28,7 @@ public class CreateLoanUseCaseTest {
 
     @Test
     public void cuandoReciboLosDatosDeUnPrestamoEntoncesLoGuardo() {
-        Loan loan = new Loan("001", null, null, null, null, null);
+        Loan loan = new Loan( null, null, null);
 
         createLoanUseCase.execute(loan);
 

@@ -5,8 +5,8 @@ import com.iesam.digitallibrary.feature.user.domain.User;
 
 public class LoanFactory {
 
-    public Loan build(String id, User user, DigitalBook digitalBook, String initialLoanDate, String returnLoanDate, boolean finalized){
-        return new Loan(id, user, digitalBook, initialLoanDate, returnLoanDate,  finalized);
+    public Loan buildFinalizedLoan(Loan loan){
+        return new Loan(loan.id, loan.user, loan.digitalBook, loan.loanInitialDate, loan.returnDate, true);
     }
 
 }

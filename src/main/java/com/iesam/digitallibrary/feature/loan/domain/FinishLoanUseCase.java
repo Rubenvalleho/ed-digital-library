@@ -7,14 +7,14 @@ public class FinishLoanUseCase {
 
     private LoanFactory factory;
 
-    public FinishLoanUseCase(LoanRepository loanRepository, LoanFactory loanFactory) {
+    public FinishLoanUseCase(LoanRepository loanRepository, LoanFactory factory) {
         this.loanRepository = loanRepository;
-        this.factory = loanFactory;
+        this.factory = factory;
     }
 
     public void execute (String id) {
         Loan loan = loanRepository.getLoan(id);
-        Loan loanFinished = factory.build(loan.id, loan.user, loan.digitalBook, loan.loanInitialDate, loan.returnDate, true);
-        loanRepository.finishLoan(loanFinished);
+        Loan loanFinalized = factory.buildFinalizedLoan(loan);
+        loanRepository.finishLoan(loanFinalized);
     }
 }
