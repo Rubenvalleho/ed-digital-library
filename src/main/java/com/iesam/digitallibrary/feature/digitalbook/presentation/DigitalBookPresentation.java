@@ -48,7 +48,8 @@ public class DigitalBookPresentation {
     public static void saveDigitalBook() {
         Scanner scanner = new Scanner(System.in);
         DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
-        CreateDigitalBookUseCase createDigitalBookUseCase = new CreateDigitalBookUseCase(digitalBookDataRepository);
+        DigitalBookFactory digitalBookFactory = new DigitalBookFactory();
+        CreateDigitalBookUseCase createDigitalBookUseCase = new CreateDigitalBookUseCase(digitalBookDataRepository, digitalBookFactory);
 
         System.out.println("Introduce el id del libro: ");
         String id = scanner.next();
@@ -61,8 +62,8 @@ public class DigitalBookPresentation {
         System.out.println("Introduce la fecha de salida del libro: ");
         String releaseDate = scanner.next();
 
-        DigitalBook digitalBook = new DigitalBook(id, title, author, editorial, releaseDate);
-        createDigitalBookUseCase.execute(digitalBook);
+        createDigitalBookUseCase.execute(id, title, author, editorial, releaseDate);
+        System.out.println("Se ha guardado el libro con los datos introducidos.");
     }
 
     public static void getDigitalBook() {
@@ -74,7 +75,11 @@ public class DigitalBookPresentation {
         String id = scanner.next();
 
         DigitalBook digitalBook = getDigitalBookUseCase.execute(id);
-        System.out.println(digitalBook);
+        if (digitalBook == null) {
+            System.err.println("No existe un libro con ese ID");
+        } else {
+            System.out.println(digitalBook);
+        }
     }
 
     public static void deleteDigitalBook() {
@@ -92,8 +97,11 @@ public class DigitalBookPresentation {
 
     public static void modifyDigitalBook() {
         Scanner scanner = new Scanner(System.in);
-        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
-        ModifyDigitalBookUseCase modifyDigitalBookUseCase = new ModifyDigitalBookUseCase(digitalBookDataRepository);
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
+                new DigitalBookFileLocalDataSource());
+        DigitalBookFactory digitalBookFactory = new DigitalBookFactory();
+        ModifyDigitalBookUseCase modifyDigitalBookUseCase = new ModifyDigitalBookUseCase(
+                digitalBookDataRepository, digitalBookFactory);
 
         System.out.println("Introduce el id del libro digital a modificar: ");
         String id = scanner.next();
@@ -106,9 +114,7 @@ public class DigitalBookPresentation {
         System.out.println("Introduce la fecha de salida: ");
         String releaseDate = scanner.next();
 
-        DigitalBook digitalBook = new DigitalBook(id,title,author,editorial,releaseDate);
-
-        modifyDigitalBookUseCase.execute(digitalBook);
+        modifyDigitalBookUseCase.execute(id, title, author, editorial, releaseDate);
         System.out.println("Libro digital modificado con exito.");
     }
 
@@ -118,9 +124,12 @@ public class DigitalBookPresentation {
 
         List<DigitalBook> allDigitalBooks = getAllDigitalBooksUseCase.execute();
 
-        for (DigitalBook digitalBook : allDigitalBooks) {
-            System.out.println(digitalBook);
+        if (allDigitalBooks == null) {
+            System.err.println("No tenemos ningún libro disponible en estos momentos.");
+        } else {
+            for (DigitalBook digitalBook : allDigitalBooks) {
+                System.out.println(digitalBook);
+            }
         }
-
     }
 }

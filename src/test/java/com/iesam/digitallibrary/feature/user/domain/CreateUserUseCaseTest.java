@@ -14,11 +14,14 @@ public class CreateUserUseCaseTest {
     @Mock
     UserRepository userRepository;
 
+    @Mock
+    UserFactory userFactory;
+
     CreateUserUseCase createUserUseCase;
 
     @BeforeEach
     public void setUp() {
-        createUserUseCase = new CreateUserUseCase(userRepository);
+        createUserUseCase = new CreateUserUseCase(userRepository, userFactory);
     }
 
     @AfterEach
@@ -28,9 +31,11 @@ public class CreateUserUseCaseTest {
 
     @Test
     public void reciboUnUsuarioYEjecutoElMetodoAddUserParaGuardarlo() {
-        User user = new User("1", "777", "Ruben", "Vallejo", "666", "Calle");
+        User user = new User("001", null, null, null, null, null);
+        Mockito.when(userFactory.build("001", null, null, null, null,
+                null)).thenReturn(user);
 
-        createUserUseCase.execute(user);
+        createUserUseCase.execute("001", null, null, null, null, null);
 
         Mockito.verify(userRepository, Mockito.times(1)).saveUser(user);
     }

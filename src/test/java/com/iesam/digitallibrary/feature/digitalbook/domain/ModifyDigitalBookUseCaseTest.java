@@ -14,11 +14,14 @@ public class ModifyDigitalBookUseCaseTest {
     @Mock
     DigitalBookRepository digitalBookRepository;
 
+    @Mock
+    DigitalBookFactory digitalBookFactory;
+
     ModifyDigitalBookUseCase modifyDigitalBookUseCase;
 
     @BeforeEach
     public void setUp() {
-        modifyDigitalBookUseCase = new ModifyDigitalBookUseCase(digitalBookRepository);
+        modifyDigitalBookUseCase = new ModifyDigitalBookUseCase(digitalBookRepository, digitalBookFactory);
     }
 
     @AfterEach
@@ -29,8 +32,10 @@ public class ModifyDigitalBookUseCaseTest {
     @Test
     public void cuandoObtengoUnLibroDigitalEntoncesLoModifico() {
         DigitalBook digitalBook = new DigitalBook("1", null, null, null, null);
+        Mockito.when(digitalBookFactory.build("1", null, null, null, null))
+                .thenReturn(digitalBook);
 
-        modifyDigitalBookUseCase.execute(digitalBook);
+        modifyDigitalBookUseCase.execute("1", null, null, null, null);
 
         Mockito.verify(digitalBookRepository, Mockito.times(1)).modifyDigitalBook(digitalBook);
     }

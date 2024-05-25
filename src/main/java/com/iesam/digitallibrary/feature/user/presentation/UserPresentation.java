@@ -66,11 +66,11 @@ public class UserPresentation {
         String address = scanner.next();
 
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
-        CreateUserUseCase createUserUseCase = new CreateUserUseCase(userDataRepository);
+        UserFactory userFactory = new UserFactory();
+        CreateUserUseCase createUserUseCase = new CreateUserUseCase(userDataRepository, userFactory);
 
-        User user = new User(userCode, dni, name, lastName, phoneNumber, address);
-
-        createUserUseCase.execute(user);
+        createUserUseCase.execute(userCode, dni, name, lastName, phoneNumber, address);
+        System.out.println("Usuario añadido con exito.");
     }
 
     public static void viewUser() {
@@ -83,7 +83,12 @@ public class UserPresentation {
 
         User user = getUserUseCase.execute(userCode);
 
-        System.out.println(user);
+        if (user == null) {
+            System.err.println("No existe un usuario con ese ID");
+        } else {
+            System.out.println(user);
+        }
+
     }
 
     public static void getUsersList() {
@@ -92,9 +97,14 @@ public class UserPresentation {
 
         ArrayList<User> users = getUsersListUseCase.execute();
 
-        for (User user : users) {
-            System.out.println(user);
+        if (users == null) {
+            System.err.println("No hay ningún usuario registrado.");
+        } else {
+            for (User user : users) {
+                System.out.println(user);
+            }
         }
+
     }
 
     public static void modifyUser() {
@@ -115,10 +125,10 @@ public class UserPresentation {
         String address = scanner.next();
 
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
-        ModifyUserUseCase modifyUserUseCase = new ModifyUserUseCase(userDataRepository);
+        UserFactory userFactory = new UserFactory();
+        ModifyUserUseCase modifyUserUseCase = new ModifyUserUseCase(userDataRepository, userFactory);
 
-        User user = new User(userCode, dni, name, lastName, phoneNumber, address);
-        modifyUserUseCase.execute(user);
+        modifyUserUseCase.execute(userCode, dni, name, lastName, phoneNumber, address);
     }
 
     public static void deleteUser() {
@@ -129,5 +139,6 @@ public class UserPresentation {
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource());
         DeleteUserUseCase deleteUserUseCase = new DeleteUserUseCase(userDataRepository);
         deleteUserUseCase.execute(userCode);
+        System.out.println("Usuario eliminado con exito.");
     }
 }
