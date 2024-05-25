@@ -49,6 +49,7 @@ public class UserPresentation {
         }
         while (choice != 10);
     }
+
     public static void addUser() {
         Scanner scanner = new Scanner(System.in);
 
@@ -91,6 +92,7 @@ public class UserPresentation {
         } else {
             System.out.println(user);
         }
+    }
 
     public static void getUsersList() {
         UserDataRepository userDataRepository = new UserDataRepository(new UserFileLocalDataSource(),
@@ -106,6 +108,7 @@ public class UserPresentation {
                 System.out.println(user);
             }
         }
+    }
 
     public static void modifyUser() {
         Scanner scanner = new Scanner(System.in);
@@ -144,3 +147,4 @@ public class UserPresentation {
         System.out.println("Usuario eliminado con exito.");
     }
 }
+
