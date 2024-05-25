@@ -12,7 +12,7 @@ public class LoanMemLocalDataSource implements LoanLocalDataSource {
     private static LoanMemLocalDataSource instance = null;
 
     private LoanMemLocalDataSource() {
-        new LoanMemLocalDataSource();
+
     }
 
     public static LoanMemLocalDataSource getInstance() {

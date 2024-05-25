@@ -2,6 +2,7 @@ package com.iesam.digitallibrary.feature.digitalbook.presentation;
 
 import com.iesam.digitallibrary.feature.digitalbook.data.DigitalBookDataRepository;
 import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookFileLocalDataSource;
+import com.iesam.digitallibrary.feature.digitalbook.data.local.DigitalBookMemLocalDataSource;
 import com.iesam.digitallibrary.feature.digitalbook.domain.*;
 
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class DigitalBookPresentation {
 
     public static void saveDigitalBook() {
         Scanner scanner = new Scanner(System.in);
-        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
+                new DigitalBookFileLocalDataSource(), DigitalBookMemLocalDataSource.getInstance());
         DigitalBookFactory digitalBookFactory = new DigitalBookFactory();
         CreateDigitalBookUseCase createDigitalBookUseCase = new CreateDigitalBookUseCase(digitalBookDataRepository, digitalBookFactory);
 
@@ -68,7 +70,8 @@ public class DigitalBookPresentation {
 
     public static void getDigitalBook() {
         Scanner scanner = new Scanner(System.in);
-        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
+                new DigitalBookFileLocalDataSource(), DigitalBookMemLocalDataSource.getInstance());
         GetDigitalBookUseCase getDigitalBookUseCase = new GetDigitalBookUseCase(digitalBookDataRepository);
 
         System.out.println("Introduce el id del libro a obtener: ");
@@ -84,7 +87,8 @@ public class DigitalBookPresentation {
 
     public static void deleteDigitalBook() {
         Scanner scanner = new Scanner(System.in);
-        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
+                new DigitalBookFileLocalDataSource(), DigitalBookMemLocalDataSource.getInstance());
         DeleteDigitalBookUseCase deleteDigitalBookUseCase = new DeleteDigitalBookUseCase(digitalBookDataRepository);
 
         System.out.println("Introduce el id del libro a eliminar: ");
@@ -98,7 +102,7 @@ public class DigitalBookPresentation {
     public static void modifyDigitalBook() {
         Scanner scanner = new Scanner(System.in);
         DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
-                new DigitalBookFileLocalDataSource());
+                new DigitalBookFileLocalDataSource(), DigitalBookMemLocalDataSource.getInstance());
         DigitalBookFactory digitalBookFactory = new DigitalBookFactory();
         ModifyDigitalBookUseCase modifyDigitalBookUseCase = new ModifyDigitalBookUseCase(
                 digitalBookDataRepository, digitalBookFactory);
@@ -119,7 +123,8 @@ public class DigitalBookPresentation {
     }
 
     public static void getAllDigitalBooks() {
-        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(new DigitalBookFileLocalDataSource());
+        DigitalBookDataRepository digitalBookDataRepository = new DigitalBookDataRepository(
+                new DigitalBookFileLocalDataSource(), DigitalBookMemLocalDataSource.getInstance());
         GetAllDigitalBooksUseCase getAllDigitalBooksUseCase = new GetAllDigitalBooksUseCase(digitalBookDataRepository);
 
         List<DigitalBook> allDigitalBooks = getAllDigitalBooksUseCase.execute();

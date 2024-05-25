@@ -13,7 +13,6 @@ public class DigitalBookMemLocalDataSource implements DigitalBookLocalDataSource
     private static DigitalBookMemLocalDataSource instance = null;
 
     private DigitalBookMemLocalDataSource() {
-
     }
 
     public static DigitalBookMemLocalDataSource getInstance() {

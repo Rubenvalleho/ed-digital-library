@@ -27,7 +27,7 @@ public class UserDataRepository implements UserRepository {
         User userFile = fileLocalDataSource.findById(userCode);
 
         if (userMem == null) {
-            userMem = fileLocalDataSource.findById(userCode);
+            userMem = userFile;
             if (userMem != null) {
                 memLocalDataSource.save(userFile);
             }
