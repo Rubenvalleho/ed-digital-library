@@ -7,35 +7,52 @@ import com.iesam.digitallibrary.feature.loan.domain.LoanRepository;
 import java.util.List;
 
 public class LoanDataRepository implements LoanRepository {
-    private LoanLocalDataSource loanLocalDataSource;
+    private LoanLocalDataSource fileLocalDataSource;
+    private LoanLocalDataSource memLocalDataSource;
 
-    public LoanDataRepository(LoanLocalDataSource loanLocalDataSource) {
-        this.loanLocalDataSource = loanLocalDataSource;
+    public LoanDataRepository(LoanLocalDataSource fileLocalDataSource, LoanLocalDataSource memLocalDataSource) {
+        this.fileLocalDataSource = fileLocalDataSource;
+        this.memLocalDataSource = memLocalDataSource;
     }
 
     @Override
     public void saveLoan(Loan loan) {
-        loanLocalDataSource.save(loan);
+        fileLocalDataSource.save(loan);
     }
 
     @Override
     public void deleteLoan(String id) {
-        loanLocalDataSource.delete(id);
+        fileLocalDataSource.delete(id);
     }
 
     @Override
     public void finishLoan(Loan loan) {
-        loanLocalDataSource.modify(loan);
+        fileLocalDataSource.modify(loan);
     }
 
     @Override
     public Loan getLoan(String id) {
-        return loanLocalDataSource.findById(id);
+        Loan loanFile = fileLocalDataSource.findById(id);
+        Loan loanMem = memLocalDataSource.findById(id);
+
+        if (loanMem == null) {
+            loanMem = loanFile;
+            if (loanMem != null) {
+                memLocalDataSource.save(loanMem);
+            }
+            return loanFile;
+        }
+
+        if (loanFile != null && !loanFile.equals(loanMem)) {
+            memLocalDataSource.save(loanFile);
+            return loanFile;
+        }
+        return loanMem;
     }
 
     @Override
     public List<Loan> getAllLoans() {
-        return loanLocalDataSource.findAll();
+        return fileLocalDataSource.findAll();
     }
 
 }

@@ -47,7 +47,6 @@ public class CreateLoanUseCaseTest {
         Mockito.when(digitalBookRepository.getDigitalBook("1")).thenReturn(new DigitalBook("1", null, null, null, null));
         DigitalBook digitalBook = digitalBookRepository.getDigitalBook("1");
 
-
         Loan loan = new Loan( user, digitalBook, false);
         Mockito.when(loanFactory.build(null, null, false)).thenReturn(loan);
 
