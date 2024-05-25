@@ -143,6 +143,5 @@ public class LoanPresentation {
                 System.out.println(loan);
             }
         }
-
     }
 }
